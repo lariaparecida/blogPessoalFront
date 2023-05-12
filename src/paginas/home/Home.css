@@ -1,7 +1,6 @@
 .titulo {
     color: black;
     text-align: center;
-    font-family: fantasy;
 }
 
 .img {
@@ -10,3 +9,4 @@
     display: block;
     margin: 0 auto;
 }
+
