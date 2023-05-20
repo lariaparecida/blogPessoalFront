@@ -1,10 +1,16 @@
 import Navbar from './components/estaticos/navbar/Navbar';
+import Footer from './components/estaticos/footer/Footer';
+
 import Home from './paginas/home/Home';
 import Login from './paginas/login/Login';
-import Footer from './components/estaticos/footer/Footer';
 import CadastroUsuario from './paginas/cadastroUsuario/CadastroUsuario';
-import "./App.css";
+import ListaTemas from './components/temas/listaTemas/ListaTemas';
+import ListaPostagens from './components/postagens/listaPostagens/ListaPostagens';
+
 import { BrowserRouter , Routes , Route } from 'react-router-dom'
+
+import "./App.css";
+
 
 function App() {
   return (
@@ -22,6 +28,13 @@ function App() {
             <Route path="/home" element={<Home />} />
 
             <Route path="/cadastroUsuario" element={<CadastroUsuario />} />
+
+            <Route path="/temas" element={<ListaTemas />} />
+
+            <Route path="/postagens" element={<ListaPostagens />} />
+
+            {/* <Route path="/postagens" element={<Postagens />} /> */}
+
 
           </Routes>
         </div>

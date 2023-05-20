@@ -11,5 +11,5 @@ export const api = axios.create({
 
     export const login = async (url: any, dados: any, setDado: any) => {
         const resposta = await api.post(url, dados)
-        setDado(resposta.data)
+        setDado(resposta.data.token)
     }
