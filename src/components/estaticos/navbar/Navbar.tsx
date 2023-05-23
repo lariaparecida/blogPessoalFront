@@ -1,9 +1,20 @@
 import { AppBar, Toolbar, Typography, Box} from '@material-ui/core';
 import {Link} from 'react-router-dom';
+import {useNavigate } from 'react-router-dom'
+import useLocalStorage from 'react-use-localstorage';
 import './Navbar.css';
 
 
 function Navbar () {
+    const [tolen, setToken] = useLocalStorage('token')
+    let navigate = useNavigate();
+
+    function goLogout() {
+        setToken('')
+        alert("Usuário deslogado!")
+        navigate('/login')
+    }
+
     return (
         <>
             <AppBar position="static">
@@ -17,44 +28,48 @@ function Navbar () {
 
         <Box display="flex" justifyContent="start">
 
-                    <Box mx={1} className='cursor'>
+                <Link to='/home' className="text-decorator-none">
+                <Box mx={1} className='cursor'>
                         <Typography variant="h6" color="inherit">
                             Home
                         </Typography>
                     </Box>
-                
-                    <Box mx={1} className='cursor'>
+                </Link>
+                    
+                <Link to='/postagens' className="text-decorator-none">
+                <Box mx={1} className='cursor'>
                         <Typography variant="h6" color="inherit">
                             Postagens
                         </Typography>
                     </Box>
-
+                </Link>
+                    
+                <Link to='/temas' className="text-decorator-none">
                     <Box mx={1} className='cursor'>
                         <Typography variant="h6" color="inherit">
                             Temas
                         </Typography>
                     </Box>
+                </Link>
 
+                <Link to ='/formularioTema' className="text-decorator-none">
                     <Box mx={1} className='cursor'>
                         <Typography variant="h6" color="inherit">
                             Cadastrar tema
                         </Typography>
                     </Box>
+                </Link>
 
-                    <Link to='/login' className='text-decorator-none'>
-                        <Box mx={1} className='cursor'>
+                        <Box mx={1} className='cursor text-decorator-none' onClick={goLogout}>
                             <Typography variant="h6" color="inherit">
                                 Logout
                             </Typography>
                         </Box>
-                    </Link>
                     
         </Box>
 
         </Toolbar>
             </AppBar>
-
-
 
         </>
     )
