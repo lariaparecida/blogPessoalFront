@@ -2,8 +2,8 @@
     import { AppBar, Tab, Tabs, Typography} from '@material-ui/core';
     import {Box} from '@mui/material';
     import { TabContext, TabPanel } from '@material-ui/lab';
-    import ListaPostagens from '../listaPostagens/ListaPostagens';
-    import './TabPostagens.css';
+    import ListaPostagens from '../listaPostagem/ListaPostagem';
+    import './TabPostagem.css';
 
 
     function TabPostagem() {

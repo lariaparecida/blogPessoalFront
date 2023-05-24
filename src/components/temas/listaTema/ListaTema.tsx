@@ -21,12 +21,21 @@ import { busca } from '../../../services/Service';
     }, [token])
 
     async function getTema(){
-        await busca("/temas", setTemas, {
+        
+        try {
+            await busca("/temas", setTemas, {
             headers: {
             'Authorization': token
             }
         })
+        } catch (error: any) {
+            if(error.toString().includes('403')) {
+                alert('O seu token expirou, logue novamente!')
+                setToken('')
+                navigate('/login')
+            }
         }
+    }
 
         useEffect(()=>{
             getTema()
@@ -72,6 +81,6 @@ import { busca } from '../../../services/Service';
             </>
         );
     }
+
         
-        
-        export default ListaTema;
+    export default ListaTema;
