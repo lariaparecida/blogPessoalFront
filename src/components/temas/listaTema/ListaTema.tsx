@@ -1,24 +1,37 @@
-    import React, {useState, useEffect} from 'react'
-    import axios from 'axios';
-    import { Link, useNavigate } from 'react-router-dom'
-    import { Box, Card, CardActions, CardContent, Button, Typography } from '@material-ui/core';
-    import Tema from '../../../models/Tema';
-    import './ListaTema.css';
-    import useLocalStorage from 'react-use-localstorage';
+import React, {useState, useEffect} from 'react'
+import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom'
+import { Box, Card, CardActions, CardContent, Button, Typography } from '@material-ui/core';
+import Tema from '../../../models/Tema';
+import './ListaTema.css';
 import { busca } from '../../../services/Service';
+import { useSelector , useDispatch } from 'react-redux';
+import { TokenState } from '../../../store/tokens/tokensReducer';
+import { addToken } from '../../../store/tokens/actions';
 
     function ListaTema() {
     
-    const [temas, setTemas] = useState<Tema[]>([])
-    const [token, setToken] = useLocalStorage('token');
-    let navigate = useNavigate();
-
+        const [temas, setTemas] = useState<Tema[]>([])
+        let navigate = useNavigate();
+        const dispatch = useDispatch();
+        const token = useSelector<TokenState, TokenState["tokens"]>(
+        (state) => state.tokens
+        );
+    
     useEffect(()=>{
         if(token == ''){
             alert("Você precisa estar logado")
             navigate("/login")
         }
     }, [token])
+
+    // async function getTema(){
+    //     await busca("/temas", setTemas, {
+    //         headers: {
+    //             'Authorization': token
+    //         }
+    //     })
+    // }
 
     async function getTema(){
         
@@ -31,7 +44,7 @@ import { busca } from '../../../services/Service';
         } catch (error: any) {
             if(error.toString().includes('403')) {
                 alert('O seu token expirou, logue novamente!')
-                setToken('')
+                dispatch(addToken(''));
                 navigate('/login')
             }
         }

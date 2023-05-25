@@ -4,14 +4,17 @@ import {Card, CardActions, CardContent, Button, Typography } from '@material-ui/
 import {Box} from '@mui/material';
 import './ListaPostagem.css';
 import Postagem from '../../../models/Postagem';
-import useLocalStorage from 'react-use-localstorage';
 import { busca } from '../../../services/Service';
+import { useSelector } from 'react-redux';
+import { TokenState } from '../../../store/tokens/tokensReducer';
 
     function ListaPostagem() {
     
     const [posts, setPosts] = useState<Postagem[]>([])
-    const [token, setToken] = useLocalStorage('token');
     let navigate = useNavigate();
+    const token = useSelector<TokenState, TokenState["tokens"]>(
+        (state) => state.tokens
+    );
     
     useEffect(() => {
     if (token == "") {
@@ -41,16 +44,28 @@ import { busca } from '../../../services/Service';
         <Box m={2} >
             <Card variant="outlined">
             <CardContent>
-                <Typography color="textSecondary" gutterBottom>
-                Postagens
+                
+                <Typography  color="textSecondary" gutterBottom>
+                    Postagens
                 </Typography>
+
                 <Typography variant="h5" component="h2">
                     {post.titulo}
                 </Typography>
+
+                {/* NOME DO USUÁRIO */}
                 <Typography variant="body2" component="p">
-                    {post.texto}                </Typography>
+                    Postado por: {post.usuario?.nome}
+                </Typography>
+
                 <Typography variant="body2" component="p">
-                    {post.tema?.descricao}                </Typography>
+                    {post.texto}
+                </Typography>
+
+                <Typography variant="body2" component="p">
+                    {post.tema?.descricao}
+                </Typography>
+
             </CardContent>
             <CardActions>
                 <Box display="flex" justifyContent="center" mb={1.5}>

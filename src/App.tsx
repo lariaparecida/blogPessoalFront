@@ -15,10 +15,13 @@ import CadastroTema from './components/temas/cadastroTema/CadastroTema';
 import DeletarPostagem from './components/postagens/deletarPostagem/DeletarPostagem';
 import DeletarTema from './components/temas/deletarTema/DeletarTema';
 
+import { Provider } from 'react-redux';
+import store from './store/store';
+
 
 function App() {
   return (
-
+    <Provider store = {store}> 
   <>
     <BrowserRouter> 
       <Navbar />
@@ -55,19 +58,7 @@ function App() {
       <Footer />
     </BrowserRouter>
   </>
-  // <>
-  //   <Router> -- atual BroswerRouter
-  //     <Navbar />  -- mantém        
-  //         <Switch> -- Novo Routes
-  //           <div> -- a nova vem antes do Route/Switch
-  //              <Route path='/home'>
-  //                 <Home />
-  //              </Route>
-  //           </div>
-  //         </Switch>
-  //     <Footer />
-  //   </Router>
-  // </>
+  </Provider>
   );
 }
 
