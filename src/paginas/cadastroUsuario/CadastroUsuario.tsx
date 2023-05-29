@@ -5,6 +5,7 @@ import { cadastroUsuario } from '../../services/Service'
 import { Box, Grid, Typography, Button, TextField } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import './CadastroUsuario.css';
+import { toast } from 'react-toastify';
 
 
 function CadastroUsuario(){
@@ -16,7 +17,9 @@ function CadastroUsuario(){
             id: 0,
             nome: '',
             usuario: '',
-            senha: ''
+            senha: '',
+            foto: '',
+            postagem: []
         })
 
     const [userResult, setUserResult] = useState<User>(
@@ -24,7 +27,9 @@ function CadastroUsuario(){
             id: 0,
             nome: '',
             usuario: '',
-            senha: ''
+            senha: '',
+            foto: '',
+            postagem: []
         })
 
     useEffect(() => {
@@ -51,10 +56,26 @@ function CadastroUsuario(){
         event.preventDefault()
         if(confirmarSenha == user.senha){
         cadastroUsuario(`/usuarios/cadastrar`, user, setUserResult)
-        alert('Usuario cadastrado com sucesso')
-        }else{
-            alert('Dados inconsistentes. Favor verificar as informações de cadastro.')
-        }
+        toast.success('Usuário cadastrado com sucesso!', {
+            position: "top-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: false,
+            theme: "colored",
+            progress: undefined,
+        })          }else{
+            toast.error('Dados incosistentes, tente novamente!', {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: false,
+                theme: "colored",
+                progress: undefined,
+            })          }
     }
 
 
