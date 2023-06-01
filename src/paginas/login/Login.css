@@ -1,5 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Passion+One:wght@400&display=swap');
+
 .textos1 {
-    font-weight: bold !important;
+    font-family: "Passion One", sans-serif !important;
+    font-size: 50px!important;
+    color:orange !important;
 }
 
 .imagem {
